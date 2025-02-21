@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>My Extension Popup</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 10px;
+        font-family: sans-serif;
+      }
+      button {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+      }
+      button:hover {
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+        <label for="documentId">Google Doc ID:</label>
+        <input id="documentId" placeholder="It's after /d/ in the Google Doc URL until the next '/'" />
+    </div>
+    <br />
+    <div>
+        <label for="fontFamily">Document Font Family</label>
+        <input id="fontFamily" placeholder="Font must match exact text from Google Doc" />
+    </div>
+    <br />
+    <button id="submitButton">Save Settings</button>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
