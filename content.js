@@ -1,4 +1,4 @@
-function addBuildResumeButton(){
+function addBuildResumeButton(jobDesc){
     let parentElement = document.querySelector('.jobs-save-button').parentNode;
     const el = document.createElement('div');
     const svgUrl = chrome.runtime.getURL('icons/icon-svg.svg');
@@ -13,12 +13,11 @@ function addBuildResumeButton(){
     el.appendChild(document.createElement('span')).innerText = 'Custom Resume';
     
     el.addEventListener('click', () => {
-        const text = document.querySelector('#job-details').innerText;
         const requestData = {
           documentId: null,
           fontFamily: null,
-          companyName: document.querySelector('.job-details-jobs-unified-top-card__company-name > a').innerText,
-          jobDesc: text
+          companyName: document.querySelector('.job-details-jobs-unified-top-card__job-title a').innerText,
+          jobDesc: jobDesc
         };
       
         // Retrieve both keys at once
@@ -53,16 +52,19 @@ function addBuildResumeButton(){
       parentElement.appendChild(document.createElement('br'));
 }
 
-function getLinkedInJobDescription(){
+function getLinkedInJobDescription(jobDesc){
     if(document.querySelector('.build-resume-button')) return;
-    addBuildResumeButton();
+    addBuildResumeButton(jobDesc);
 }
 
 {
     let linkedInJobInterval = setInterval(() => {
-        const jobDesc = document.getElementById('job-details')
+      
+        const jobDesc = document.querySelectorAll('#job-details li')
+        let descStr = ""
+        jobDesc.forEach((li) => descStr += li.textContent)
         if (jobDesc) {
-            getLinkedInJobDescription();
+            getLinkedInJobDescription(descStr);
             clearInterval(linkedInJobInterval);
         }
     }, 1000);
